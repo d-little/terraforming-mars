@@ -20,6 +20,8 @@ import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {SelectOption} from '../inputs/SelectOption';
 import {OrOptions} from '../inputs/OrOptions';
 import {MultiSet} from 'mnemonist';
+import {CeoExtension} from '../CeoExtension';
+import {Darwin} from '../cards/ceos/Darwin';
 
 export type NeutralPlayer = 'NEUTRAL';
 export type Delegate = PlayerId | NeutralPlayer;
@@ -188,7 +190,7 @@ export class Turmoil {
   }
 
   // Function to get next dominant party taking into account the clockwise order
-  public setNextPartyAsDominant(currentDominantParty: IParty) {
+  public setNextPartyAsDominant(currentDominantParty: IParty, game: Game) {
     const sortParties = [...this.parties].sort(
       (p1, p2) => p2.delegates.size - p1.delegates.size,
     );
@@ -211,10 +213,11 @@ export class Turmoil {
 
     // Take the clockwise order
     const partiesOrdered = partiesToCheck.reverse();
-
     partiesOrdered.some((newParty) => {
       if (newParty.delegates.size === max) {
         this.dominantParty = newParty;
+        // Darwin static effect hook, grant 2MC on party change
+        Darwin.onDominantPartyChange(game);
         return true;
       }
       return false;
@@ -242,7 +245,7 @@ export class Turmoil {
     this.setRulingParty(game);
 
     // 3.b - New dominant party
-    this.setNextPartyAsDominant(this.rulingParty);
+    this.setNextPartyAsDominant(this.rulingParty, game);
 
     // 3.c - Fill the lobby
     this.usedFreeDelegateAction.clear();
@@ -393,6 +396,10 @@ export class Turmoil {
         influence+= bonus;
       }
     }
+
+    // CEO Darwin OPG Hook
+    influence += CeoExtension.getBonusInfluence(player);
+
     return influence;
   }
 
