@@ -16,6 +16,11 @@ export class CeoExtension {
     return xavier?.opgActionIsActive === true ? 2 : 0;
   }
 
+  public static getBonusInfluence(player: Player) {
+    const darwin = player.getCeo(CardName.DARWIN);
+    return darwin?.opgActionIsActive === true ? 2 : 0;
+  }
+
   public static ceoActionIsUsable(player: Player): boolean {
     // If _at least_ one CEO has usable actions, return true
     return player.playedCards.some((card) => isCeoCard(card) && card.canAct(player));

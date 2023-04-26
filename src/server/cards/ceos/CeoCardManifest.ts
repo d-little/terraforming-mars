@@ -6,6 +6,7 @@ import {Asimov} from './Asimov';
 import {Bjorn} from './Bjorn';
 import {Caesar} from './Caesar';
 import {Clarke} from './Clarke';
+import {Darwin} from './Darwin';
 import {Duncan} from './Duncan';
 import {Ender} from './Ender';
 import {Faraday} from './Faraday';
@@ -50,6 +51,7 @@ export const CEO_CARD_MANIFEST = new ModuleManifest({
     [CardName.BJORN]: {Factory: Bjorn},
     [CardName.CAESAR]: {Factory: Caesar, compatibility: 'ares'},
     [CardName.CLARKE]: {Factory: Clarke},
+    [CardName.DARWIN]: {Factory: Darwin, compatibility: 'turmoil'},
     [CardName.DUNCAN]: {Factory: Duncan},
     [CardName.ENDER]: {Factory: Ender},
     [CardName.FARADAY]: {Factory: Faraday},
