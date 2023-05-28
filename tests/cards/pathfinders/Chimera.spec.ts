@@ -48,7 +48,7 @@ describe('Chimera', function() {
   });
 
   it('as award', function() {
-    // Scientist: Having the most science tags in play
+    // Scientist: Have the most science tags
     const award = new Scientist();
     expect(award.getScore(player)).eq(1);
     player.playedCards = [new AdaptationTechnology()];
@@ -56,7 +56,7 @@ describe('Chimera', function() {
   });
 
   it('as milestone, single tag count', function() {
-    // Businessperson: Requires that you have 6 Earth tags in play
+    // Businessperson: Have at least 6 Earth tags in play
     const milestone = new Businessperson();
     player.playedCards = [new BusinessNetwork(), new EarthCatapult(), new Cartel()];
     expect(milestone.getScore(player)).eq(4);
