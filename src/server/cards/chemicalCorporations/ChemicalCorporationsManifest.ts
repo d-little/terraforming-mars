@@ -6,7 +6,7 @@ import {AndersonRocketManufacturing} from './AndersonRocketManufacturing';
 export const CHEMICAL_CORPORATIONS_CARD_MANIFEST = new ModuleManifest({
   module: 'chemicalCorporations',
   corporationCards: {
-    [CardName.ANDERSON_ROCKET_MANUFACTURING]: {Factory: AndersonRocketManufacturing},
+    [CardName.ANDERSON_ROCKET_MANUFACTURING]: {Factory: AndersonRocketManufacturing, compatibility: 'turmoil'},
     [CardName.ASTRO_BIOTICS]: {Factory: AstroBiotics},
   },
 });
