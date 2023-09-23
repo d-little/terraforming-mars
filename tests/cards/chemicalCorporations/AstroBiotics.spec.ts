@@ -6,6 +6,10 @@ import {TestPlayer} from '../../TestPlayer';
 import {Ants} from '../../../src/server/cards/base/Ants';
 import {Trees} from '../../../src/server/cards/base/Trees';
 
+import {cast, churnAction} from '../../TestingUtils';
+import {GreeneryStandardProject} from '../../../src/server/cards/base/standardProjects/GreeneryStandardProject';
+import {SelectSpace} from '../../../src/server/inputs/SelectSpace';
+
 describe('AstroBiotics', function() {
   let player: TestPlayer;
   let card: AstroBiotics;
@@ -24,6 +28,18 @@ describe('AstroBiotics', function() {
     expect(card.getCardDiscount(player, new Trees())).to.eq(3);
   });
 
-  // TODO: Test Standard Greenery Project
+  it('Discount for Greenery standard project', function() {
+    player.playedCards.push(card);
+    player.megaCredits = 20;
+    player.setTerraformRating(20);
 
+    const greeneryStandardProject = new GreeneryStandardProject();
+
+    const selectSpace = cast(churnAction(greeneryStandardProject, player), SelectSpace);
+    const availableSpace = selectSpace.spaces[0];
+
+    selectSpace?.cb(availableSpace);
+
+    expect(player.megaCredits).eq(0);
+  });
 });
