@@ -25,7 +25,7 @@ export class AstroBiotics extends Card implements ICorporationCard {
         description: 'You start with 52 M€. As your first action draw 2 cards with plant tags.',
         renderData: CardRenderer.builder((b) => {
           b.br;
-          b.megacredits(42).cards(2, {secondaryTag: Tag.PLANT}).br;
+          b.megacredits(52).cards(2, {secondaryTag: Tag.PLANT}).br;
           b.corpBox('effect', (ce) => {
             ce.effect('when you play a plant tag OR THE GREENERY STANDARD PROJECT, you pay 3MC less for it. (NB: You will get the discount for the Greenery project, but it\'s not rendered correctly.)', (eb) => {
               eb.startEffect.plants(1, {played}).asterix().colon().megacredits(-3);
@@ -33,7 +33,7 @@ export class AstroBiotics extends Card implements ICorporationCard {
           });
         }),
       },
-      startingMegaCredits: 42,
+      startingMegaCredits: 52,
     });
   }
 }
