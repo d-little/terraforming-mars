@@ -200,10 +200,11 @@ const moduleAbbreviations: Record<GameModule, string> = {
   pathfinders: 'P',
   ceo: 'l', // ceo abbreviation is 'l' for leader, since both 'C' are already taken
   starwars: 'w',
+  chemicalCorporations: 'D',
 };
 
 // TODO(kberg): make this use suffixModules.
-const ALL_MODULES = 'bcpvCt*ramPl2w';
+const ALL_MODULES = 'bcpvCt*ramPl2wD';
 
 type TypeOption = CardType | 'colonyTiles' | 'globalEvents' | 'milestones' | 'awards';
 type TagOption = Tag | 'none';
@@ -317,6 +318,7 @@ export default (Vue as WithRefs<Refs>).extend({
         pathfinders: true,
         ceo: true,
         starwars: true,
+        chemicalCorporations: true,
       },
       types: {
         event: true,
@@ -513,6 +515,7 @@ export default (Vue as WithRefs<Refs>).extend({
       case 'pathfinders': return 'Pathfinders';
       case 'ceo': return 'CEOs';
       case 'starwars': return 'Star Wars';
+      case 'chemicalCorporations': return 'Chemical\'s Corporations';
       }
     },
     filterByTags(card: ClientCard): boolean {

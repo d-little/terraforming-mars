@@ -21,6 +21,13 @@ export class GreeneryStandardProject extends StandardProjectCard {
     });
   }
 
+  protected override discount(player: IPlayer): number {
+    if (player.isCorporation(CardName.ASTRO_BIOTICS)) {
+      return 3;
+    }
+    return super.discount(player);
+  }
+
   public override canPayWith(player: IPlayer) {
     if (player.isCorporation(CardName.SOYLENT_SEEDLING_SYSTEMS)) {
       return {seeds: true};

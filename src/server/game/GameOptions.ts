@@ -35,6 +35,7 @@ export type GameOptions = {
   pathfindersExpansion: boolean;
   ceoExtension: boolean;
   starWarsExpansion: boolean;
+  chemicalCorporations: boolean;
 
   // Variants
   draftVariant: boolean;
@@ -70,6 +71,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   boardName: BoardName.THARSIS,
   bannedCards: [],
   ceoExtension: false,
+  chemicalCorporations: false,
   clonedGamedId: undefined,
   coloniesExtension: false,
   communityCardsOption: false,
