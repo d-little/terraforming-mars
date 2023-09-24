@@ -31,5 +31,4 @@ export class Aerotech extends Card implements ICorporationCard {
       },
     });
   }
-
 }

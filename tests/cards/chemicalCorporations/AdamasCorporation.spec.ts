@@ -78,5 +78,4 @@ describe('AdamasCorporation', function() {
     expect(player.cardsInHand).has.length(0);
     expect(player2.cardsInHand).has.length(0);
   });
-
 });
