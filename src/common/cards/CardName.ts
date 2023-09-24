@@ -861,6 +861,7 @@ export enum CardName {
     // Chemical Corporations
     ADAMAS_CORPORATION = 'Adamas Corporation',
     AEROTECH = 'Aerotech',
+    APPLIED_NANOTECH = 'Applied Nanotech',
     ASTRO_BIOTICS = 'Astro Biotics',
     ANDERSON_ROCKET_MANUFACTURING = 'Anderson Rocket Manufacturing',
 }
