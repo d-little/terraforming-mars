@@ -66,5 +66,4 @@ describe('AndersonRocketManufacturing', function() {
     expect(game.getTemperature()).eq(-28);
     expect(player.megaCredits).eq(3);
   });
-
 });

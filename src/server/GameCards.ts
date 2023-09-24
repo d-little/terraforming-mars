@@ -96,7 +96,6 @@ export class GameCards {
         return gameOptions.starWarsExpansion;
       case 'chemicalCorporations':
         return gameOptions.chemicalCorporations;
-  
       }
       throw new Error(`Unhandled expansion type ${expansion}`);
     });

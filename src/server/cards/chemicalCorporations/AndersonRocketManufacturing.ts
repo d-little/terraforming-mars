@@ -20,7 +20,7 @@ export class AndersonRocketManufacturing extends Card implements ICorporationCar
       behavior: {
         stock: {
           steel: 5,
-          titanium: 5
+          titanium: 5,
         },
         // TR reduction handled by bespokePlay (for now?)
       },
