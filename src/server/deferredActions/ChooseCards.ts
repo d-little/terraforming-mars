@@ -78,9 +78,9 @@ export class ChooseCards extends DeferredAction {
       // Aerotech Corporation Hook
       if (player.game.phase === Phase.RESEARCH && player.isCorporation(CardName.AEROTECH)) {
         const unpurchasedCardCount = unselected.length;
-        player.stock.add(Resource.TITANIUM, unpurchasedCardCount, {log: true})
+        player.stock.add(Resource.TITANIUM, unpurchasedCardCount, {log: true});
       }
-  
+
       return undefined;
     };
 
