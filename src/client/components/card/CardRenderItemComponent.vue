@@ -453,7 +453,9 @@ export default Vue.extend({
       if (this.item.type === CardRenderItemType.WILD && this.item.cancelled === true) {
         result = '<div class="card-x">✕</div>';
       }
-
+      if (this.item.type === CardRenderItemType.CARDS && this.item.cancelled === true) {
+        result = '<div class="card-x">❌</div>';
+      }
       return result;
     },
   },

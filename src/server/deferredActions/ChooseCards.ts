@@ -5,6 +5,9 @@ import {SelectCard} from '../inputs/SelectCard';
 import {SelectPaymentDeferred} from './SelectPaymentDeferred';
 import {LogHelper} from '../LogHelper';
 import {difference} from '../../common/utils/utils';
+import {Phase} from '../../common/Phase';
+import {CardName} from '../../common/cards/CardName';
+import {Resource} from '../../common/Resource';
 
 export enum LogType {
   DREW = 'drew',
@@ -72,8 +75,15 @@ export class ChooseCards extends DeferredAction {
       } else {
         keep(player, selected, unselected, options.paying ? LogType.BOUGHT : LogType.DREW);
       }
+      // Aerotech Corporation Hook
+      if (player.game.phase === Phase.RESEARCH && player.isCorporation(CardName.AEROTECH)) {
+        const unpurchasedCardCount = unselected.length;
+        player.stock.add(Resource.TITANIUM, unpurchasedCardCount, {log: true})
+      }
+  
       return undefined;
     };
+
     return new SelectCard(msg, button, cards, cb, {max, min});
   }
 }
