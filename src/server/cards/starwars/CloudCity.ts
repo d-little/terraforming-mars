@@ -4,7 +4,6 @@ import {IProjectCard} from '../IProjectCard';
 import {Tag} from '../../../common/cards/Tag';
 import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRequirements} from '../requirements/CardRequirements';
 import {CardResource} from '../../../common/CardResource';
 
 export class CloudCity extends Card implements IProjectCard {
@@ -12,9 +11,9 @@ export class CloudCity extends Card implements IProjectCard {
     super({
       type: CardType.ACTIVE,
       name: CardName.CLOUD_CITY,
-      tags: [Tag.POWER, Tag.PLANT],
+      tags: [Tag.VENUS],
       cost: 5,
-      requirements: CardRequirements.builder((b) => b.venus(6)),
+      requirements: {venus: 6},
 
       behavior: {
         global: {venus: 1},
