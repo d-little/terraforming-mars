@@ -88,6 +88,7 @@ export class Game implements IGame, Logger {
   public undoCount: number = 0; // Each undo increases it
   public inputsThisRound = 0;
   public resettable: boolean = false;
+  public globalsPerGeneration: Array<Partial<Record<GlobalParameter, number>>> = [];
 
   public generation: number = 1;
   public phase: Phase = Phase.RESEARCH;
@@ -144,14 +145,13 @@ export class Game implements IGame, Logger {
   stJosephCathedrals: Array<SpaceId> = [];
   // Mars Nomads
   nomadSpace: SpaceId | undefined = undefined;
-
-  // The set of tags available in this game.
-  public readonly tags: ReadonlyArray<Tag>;
-
   // Trade Embargo
   public tradeEmbargo: boolean = false;
   // Behold The Emperor
   public beholdTheEmperor: boolean = false;
+
+  // The set of tags available in this game.
+  public readonly tags: ReadonlyArray<Tag>;
 
   private constructor(
     id: GameId,
@@ -406,6 +406,7 @@ export class Game implements IGame, Logger {
       gameLog: this.gameLog,
       gameOptions: this.gameOptions,
       generation: this.generation,
+      globalsPerGeneration: this.globalsPerGeneration,
       id: this.id,
       initialDraftIteration: this.initialDraftIteration,
       lastSaveId: this.lastSaveId,
@@ -728,8 +729,6 @@ export class Game implements IGame, Logger {
       this.syndicatePirateRaider = undefined;
       // Trade embargo hook.
       this.tradeEmbargo = false;
-      // Behold The Emperor hook
-      this.beholdTheEmperor = false;
     }
   }
 
@@ -738,6 +737,8 @@ export class Game implements IGame, Logger {
 
     Turmoil.ifTurmoil(this, (turmoil) => {
       turmoil.endGeneration(this);
+      // Behold The Emperor hook
+      this.beholdTheEmperor = false;
     });
 
     // turmoil.endGeneration might have added actions.
@@ -749,14 +750,31 @@ export class Game implements IGame, Logger {
     }
   }
 
-  private updateVPbyGeneration(): void {
+  private updatePlayerVPForTheGeneration(): void {
     this.getPlayers().forEach((player) => {
       player.victoryPointsByGeneration.push(player.getVictoryPoints().total);
     });
   }
 
+  private updateGlobalsForTheGeneration(): void {
+    this.globalsPerGeneration.push({});
+    const entry = this.globalsPerGeneration[this.globalsPerGeneration.length - 1];
+    entry[GlobalParameter.TEMPERATURE] = this.temperature;
+    entry[GlobalParameter.OXYGEN] = this.oxygenLevel;
+    entry[GlobalParameter.OCEANS] = this.board.getOceanSpaces().length;
+    if (this.gameOptions.venusNextExtension) {
+      entry[GlobalParameter.VENUS] = this.venusScaleLevel;
+    }
+    MoonExpansion.ifMoon(this, (moonData) => {
+      entry[GlobalParameter.MOON_HABITAT_RATE] = moonData.habitatRate;
+      entry[GlobalParameter.MOON_MINING_RATE] = moonData.miningRate;
+      entry[GlobalParameter.MOON_LOGISTICS_RATE] = moonData.logisticRate;
+    });
+  }
+
   private goToDraftOrResearch() {
-    this.updateVPbyGeneration();
+    this.updatePlayerVPForTheGeneration();
+    this.updateGlobalsForTheGeneration();
     this.generation++;
     this.log('Generation ${0}', (b) => b.forNewGeneration().number(this.generation));
     this.incrementFirstPlayer();
@@ -1018,7 +1036,8 @@ export class Game implements IGame, Logger {
         this.donePlayers.add(player.id);
       }
     }
-    this.updateVPbyGeneration();
+    this.updatePlayerVPForTheGeneration();
+    this.updateGlobalsForTheGeneration();
     this.gotoEndGame();
   }
 
@@ -1615,12 +1634,13 @@ export class Game implements IGame, Logger {
     game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
     game.syndicatePirateRaider = d.syndicatePirateRaider;
     game.gagarinBase = d.gagarinBase;
-    // TODO(kberg): remove ?? [] by 2023-11-01
+    // TODO(kberg): remove ?? [] after 2023-11-01
     game.stJosephCathedrals = d.stJosephCathedrals ?? [];
     game.nomadSpace = d.nomadSpace;
     game.tradeEmbargo = d.tradeEmbargo ?? false;
     game.beholdTheEmperor = d.beholdTheEmperor ?? false;
-
+    // TODO(kberg): remove ?? {} after 2023-11-30
+    game.globalsPerGeneration = d.globalsPerGeneration ?? {};
     // Still in Draft or Research of generation 1
     if (game.generation === 1 && players.some((p) => p.corporations.length === 0)) {
       if (game.phase === Phase.INITIALDRAFTING) {

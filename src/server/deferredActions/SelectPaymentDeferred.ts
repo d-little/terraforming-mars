@@ -15,7 +15,7 @@ export type Options = {
   canUseSpireScience?: boolean,
   canUseSagaBioengineeringAnimals?: boolean,
   title?: string | Message;
-  afterPay?: () => void;
+  afterPay?(): void;
 }
 
 export class SelectPaymentDeferred extends DeferredAction {

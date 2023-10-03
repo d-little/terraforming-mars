@@ -25,7 +25,7 @@ export class SelectProjectCardToPlay extends BasePlayerInput {
     cards: Array<PlayableCard> = player.getPlayableCards(),
     public config?: {
       action?: CardAction,
-      cb?: (cardToPlay: IProjectCard) => void,
+      cb?(cardToPlay: IProjectCard): void,
     }) {
     super('projectCard', 'Play project card');
     this.buttonLabel = 'Play card';
@@ -55,6 +55,7 @@ export class SelectProjectCardToPlay extends BasePlayerInput {
       paymentOptions: {
         heat: player.canUseHeatAsMegaCredits,
         lunaTradeFederationTitanium: player.canUseTitaniumAsMegacredits,
+        plants: player.canUsePlantsAsMegacredits,
       },
       lunaArchivesScience: player.getSpendableLunaArchiveScienceResources(),
       seeds: player.getSpendableSeedResources(),
