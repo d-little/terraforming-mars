@@ -13,6 +13,7 @@ export type Options = {
   canUseGraphene?: boolean;
   canUseAsteroids?: boolean;
   canUseSpireScience?: boolean,
+  canUseSagaBioengineeringAnimals?: boolean,
   title?: string | Message;
   afterPay?: () => void;
 }
@@ -55,7 +56,9 @@ export class SelectPaymentDeferred extends DeferredAction {
     if (this.options.canUseSpireScience && (this.player.resourcesOnCard(CardName.SPIRE) > 0)) {
       return false;
     }
-
+    if (this.options.canUseSagaBioengineeringAnimals && (this.player.resourcesOnCard(CardName.SAGA_BIOENGINEERING) > 0)) {
+      return false;
+    }
     return true;
   }
 

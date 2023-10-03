@@ -29,6 +29,8 @@ export const PAYMENT_UNITS = [
   'kuiperAsteroids',
   // Martian Lumber Corp lets players pay for building tags with plants.
   'plants',
+  // Saga Bioengineering lets player pay for plants/animals/microbes with animals.
+  'sagaBioengineeringAnimals',
 ] as const;
 /** Types of resources spent to pay for anything. */
 export type PaymentUnit = typeof PAYMENT_UNITS[number];
@@ -66,6 +68,7 @@ export const DEFAULT_PAYMENT_VALUES: Record<PaymentUnit, number> = {
   auroraiData: DATA_VALUE,
   graphene: GRAPHENE_VALUE,
   kuiperAsteroids: 1,
+  sagaBioengineeringAnimals: 3,
 } as const;
 
 export namespace Payment {
@@ -83,6 +86,7 @@ export namespace Payment {
     auroraiData: 0,
     graphene: 0,
     kuiperAsteroids: 0,
+    sagaBioengineeringAnimals: 0,
   } as const;
 
   export function of(payment: Partial<Payment>) : Payment {
@@ -100,6 +104,7 @@ export namespace Payment {
       graphene: payment.graphene ?? 0,
       kuiperAsteroids: payment.kuiperAsteroids ?? 0,
       plants: payment.plants ?? 0,
+      sagaBioengineeringAnimals: payment.sagaBioengineeringAnimals ?? 0,
     };
   }
 }
@@ -129,4 +134,5 @@ export type PaymentOptions = {
   auroraiData: boolean,
   graphene: boolean,
   kuiperAsteroids: boolean,
+  sagaBioengineeringAnimals: boolean,
 }

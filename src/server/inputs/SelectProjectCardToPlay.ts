@@ -60,6 +60,7 @@ export class SelectProjectCardToPlay extends BasePlayerInput {
       seeds: player.getSpendableSeedResources(),
       graphene: player.getSpendableGraphene(),
       kuiperAsteroids: player.getSpendableKuiperAsteroids(),
+      sagaBioengineeringAnimals: player.getSpendableSagaBioengineeringAnimals(),
     };
   }
 

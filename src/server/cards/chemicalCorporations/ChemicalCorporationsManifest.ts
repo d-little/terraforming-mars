@@ -8,6 +8,7 @@ import {AndersonRocketManufacturing} from './AndersonRocketManufacturing';
 import {AstroBiotics} from './AstroBiotics';
 
 import {MadritchFoodServices} from './MadritchFoodServices';
+import {SagaBioengineering} from './SagaBioengineering';
 
 export const CHEMICAL_CORPORATIONS_CARD_MANIFEST = new ModuleManifest({
   module: 'chemicalCorporations',
@@ -18,5 +19,6 @@ export const CHEMICAL_CORPORATIONS_CARD_MANIFEST = new ModuleManifest({
     [CardName.ANDERSON_ROCKET_MANUFACTURING]: {Factory: AndersonRocketManufacturing, compatibility: 'turmoil'},
     [CardName.ASTRO_BIOTICS]: {Factory: AstroBiotics},
     [CardName.MADRITCH_FOOD_SERVICES]: {Factory: MadritchFoodServices},
+    [CardName.SAGA_BIOENGINEERING]: {Factory: SagaBioengineering},
   },
 });

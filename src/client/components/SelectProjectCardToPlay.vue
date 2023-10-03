@@ -76,6 +76,7 @@ export default Vue.extend({
       warning: undefined,
       available: Units.of({}),
       kuiperAsteroids: 0,
+      sagaBioengineeringAnimals: 0,
     };
   },
   components: {
@@ -152,7 +153,14 @@ export default Vue.extend({
         return toSaveUnits;
       };
 
-      for (const unit of ['seeds', 'microbes', 'floaters', 'lunaArchivesScience', 'graphene'] as const) {
+      for (const unit of [
+        'seeds',
+        'microbes',
+        'floaters',
+        'lunaArchivesScience',
+        'graphene',
+        'sagaBioengineeringAnimals',
+      ] as const) {
         if (megacreditBalance > 0 && this.canUse(unit)) {
           this.$data[unit] = deductUnits(this.getAvailableUnits(unit), this.getResourceRate(unit));
         }
@@ -194,6 +202,7 @@ export default Vue.extend({
           'seeds',
           'graphene',
           'lunaArchivesScience',
+          'sagaBioengineeringAnimals',
           'megaCredits'] as const) {
           this[key] -= saveOverspendingUnits(this[key], this.getResourceRate(key));
         }
@@ -228,6 +237,10 @@ export default Vue.extend({
       case 'graphene':
         return this.tags.includes(Tag.SPACE) ||
             this.tags.includes(Tag.CITY);
+      case 'sagaBioengineeringAnimals':
+        return this.tags.includes(Tag.PLANT) ||
+            this.tags.includes(Tag.MICROBE) ||
+            this.tags.includes(Tag.ANIMAL);
       default:
         throw new Error('Unknown unit ' + unit);
       }
@@ -433,6 +446,13 @@ export default Vue.extend({
       <AppButton type="max" @click="setMaxValue('graphene')" title="MAX" />
     </div>
 
+    <div class="payments_type input-group" v-if="canUse('sagaBioengineeringAnimals')">
+      <i class="resource_icon resource_icon--animal payments_type_icon" :title="$t('Pay with (Saga Bioengineering) Animals)')"></i>
+      <AppButton type="minus" @click="reduceValue('sagaBioengineeringAnimals', 1)" />
+      <input class="form-input form-inline payments_input" v-model.number="sagaBioengineeringAnimals" />
+      <AppButton type="plus" @click="addValue('sagaBioengineeringAnimals', 1)" />
+      <AppButton type="max" @click="setMaxValue('sagaBioengineeringAnimals')" title="MAX" />
+    </div>
 
     <div class="payments_type input-group">
       <i class="resource_icon resource_icon--megacredits payments_type_icon" :title="$t('Pay with Megacredits')"></i>

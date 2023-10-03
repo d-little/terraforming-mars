@@ -60,6 +60,7 @@ describe('PlayerInputFactory', function() {
       lunaArchivesScience: 0,
       microbes: 0,
       seeds: 0,
+      sagaBioengineeringAnimals: 0,
     });
   });
 

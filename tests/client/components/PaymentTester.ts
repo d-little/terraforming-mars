@@ -25,6 +25,7 @@ export class PaymentTester {
       'auroraiData': 'Data',
       'graphene': 'graphene',
       'kuiperAsteroids': 'kupiperAsteroids',
+      'sagaBioengineeringAnimals': 'sagaBioengineeringAnimals',
     };
     const title = titles[type];
     return '[title~=' + title + ']';

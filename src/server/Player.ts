@@ -872,6 +872,7 @@ export class Player implements IPlayer {
       auroraiData: card.type === CardType.STANDARD_PROJECT,
       graphene: card.tags.includes(Tag.CITY) || card.tags.includes(Tag.SPACE),
       kuiperAsteroids: card.name === CardName.AQUIFER_STANDARD_PROJECT || card.name === CardName.ASTEROID_STANDARD_PROJECT,
+      sagaBioengineeringAnimals: [Tag.PLANT, Tag.MICROBE, Tag.ANIMAL].some(tag => card.tags.includes(tag)),
     };
   }
 
@@ -943,6 +944,10 @@ export class Player implements IPlayer {
     return this.getCorporation(CardName.SPIRE)?.resourceCount ?? 0;
   }
 
+  public getSpendableSagaBioengineeringAnimals(): number {
+    return this.getCorporation(CardName.SAGA_BIOENGINEERING)?.resourceCount ?? 0;
+  }
+
   public pay(payment: Payment) {
     const standardUnits = Units.of({
       megacredits: payment.megaCredits,
@@ -976,6 +981,7 @@ export class Player implements IPlayer {
     removeResourcesOnCard(CardName.SOYLENT_SEEDLING_SYSTEMS, payment.seeds);
     removeResourcesOnCard(CardName.AURORAI, payment.auroraiData);
     removeResourcesOnCard(CardName.KUIPER_COOPERATIVE, payment.kuiperAsteroids);
+    removeResourcesOnCard(CardName.SAGA_BIOENGINEERING, payment.sagaBioengineeringAnimals);
 
     if (payment.megaCredits > 0 || payment.steel > 0 || payment.titanium > 0) {
       PathfindersExpansion.addToSolBank(this);
@@ -1404,6 +1410,7 @@ export class Player implements IPlayer {
       auroraiData: this.getSpendableData(),
       graphene: this.getSpendableGraphene(),
       kuiperAsteroids: this.getSpendableKuiperAsteroids(),
+      sagaBioengineeringAnimals: this.getSpendableSagaBioengineeringAnimals(),
     };
   }
 
@@ -1445,6 +1452,7 @@ export class Player implements IPlayer {
       auroraiData: options?.auroraiData ?? false,
       graphene: options?.graphene ?? false,
       kuiperAsteroids: options?.kuiperAsteroids ?? false,
+      sagaBioengineeringAnimals: options?.sagaBioengineeringAnimals ?? false,
     };
 
     // HOOK: Luna Trade Federation
