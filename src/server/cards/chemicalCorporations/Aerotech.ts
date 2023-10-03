@@ -16,6 +16,7 @@ export class Aerotech extends Card implements ICorporationCard {
       name: CardName.AEROTECH,
       startingMegaCredits: 47,
 
+      // Effect is handled in src\server\deferredActions\ChooseCards.ts execute()
       metadata: {
         cardNumber: 'CHEM??',
         description: 'Start with 47MC',
