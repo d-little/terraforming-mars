@@ -865,7 +865,8 @@ export enum CardName {
     ASTRO_BIOTICS = 'Astro Biotics',
     ANDERSON_ROCKET_MANUFACTURING = 'Anderson Rocket Manufacturing',
     BLAST_POWER_INC = 'Blast Power Inc',
-    MARTIAN_NATURAL_MECHANICS = 'Martian Natural Mechanics',
     MADRITCH_FOOD_SERVICES = 'Madritch Food Services',
+    MARTIAN_NATURAL_MECHANICS = 'Martian Natural Mechanics',
+    METRO_GREEN = 'Metro Green',
     SAGA_BIOENGINEERING = 'Saga Bioengineering',
 }
