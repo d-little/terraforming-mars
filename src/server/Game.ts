@@ -1253,6 +1253,9 @@ export class Game implements IGame, Logger {
       this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
         if (Board.isOceanSpace(adjacentSpace)) {
           player.megaCredits += player.oceanBonus;
+        } else if(player.isCorporation(CardName.MARTIAN_NATURAL_MECHANICS) && adjacentSpace.tile !== undefined) {
+          // Martian Natural Mechanics hook
+          player.megaCredits += 1;
         }
       });
 
