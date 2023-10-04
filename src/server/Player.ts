@@ -655,11 +655,6 @@ export class Player implements IPlayer {
       this.megaCredits += solBank.resourceCount;
       solBank.resourceCount = 0;
     }
-    // Blast Power Inc. hook.
-    const blastPowerInc = this.getCorporation(CardName.BLAST_POWER_INC);
-    if (blastPowerInc !== undefined && this.production.steel > 0) {
-      this.stock.add(Resource.HEAT, this.production.steel, {log: true});
-    }
   }
 
   private doneWorldGovernmentTerraforming(): void {

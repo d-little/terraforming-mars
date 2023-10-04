@@ -37,7 +37,6 @@ export class BlastPowerInc extends Card implements IActionCard, ICorporationCard
             });
           });
           b.br;
-          // Effect is handled in Player.finishProductionPhase()
           b.effect('during the production phase, gain 1 heat for each steel production you have.', (eb) => {
             eb.production((pb) => {
               pb.steel(1);
@@ -50,10 +49,18 @@ export class BlastPowerInc extends Card implements IActionCard, ICorporationCard
   public canAct(player: IPlayer): boolean {
     return player.canAfford({cost: 8, steel: true});
   }
+
   public action(player: IPlayer) {
     player.game.defer(new SelectPaymentDeferred(player, 8, {canUseSteel: true, title: 'Select how to pay for action', afterPay: () => {
       player.production.add(Resource.STEEL, 1, {log: true});
     }}));
+    return undefined;
+  }
+
+  public onProductionPhase(player: IPlayer) {
+    if (player.production.steel > 0) {
+      player.stock.add(Resource.HEAT, player.production.steel, {log: true});
+    }
     return undefined;
   }
 }
