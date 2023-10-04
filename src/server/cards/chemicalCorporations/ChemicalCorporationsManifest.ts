@@ -11,6 +11,7 @@ import {MadritchFoodServices} from './MadritchFoodServices';
 import {MartianNaturalMechanics} from './MartianNaturalMechanics';
 import {MetroGreen} from './MetroGreen';
 import {SagaBioengineering} from './SagaBioengineering';
+import {NASEP} from './NASEP';
 
 export const CHEMICAL_CORPORATIONS_CARD_MANIFEST = new ModuleManifest({
   module: 'chemicalCorporations',
@@ -24,6 +25,7 @@ export const CHEMICAL_CORPORATIONS_CARD_MANIFEST = new ModuleManifest({
     [CardName.MADRITCH_FOOD_SERVICES]: {Factory: MadritchFoodServices},
     [CardName.MARTIAN_NATURAL_MECHANICS]: {Factory: MartianNaturalMechanics},
     [CardName.METRO_GREEN]: {Factory: MetroGreen},
+    [CardName.NASEP]: {Factory: NASEP},
     [CardName.SAGA_BIOENGINEERING]: {Factory: SagaBioengineering},
   },
 });

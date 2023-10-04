@@ -19,4 +19,7 @@ export enum AltSecondaryTag {
 
   // used in Faraday CEO
   DIVERSE = 'diverse',
+
+  // Used by NASEP
+  MEGACREDITS = 'megacredits',
 }
